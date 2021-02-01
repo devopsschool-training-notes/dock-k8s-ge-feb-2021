@@ -281,12 +281,65 @@ Assignment
 Stop Vs Kill
 Pause Vs Unpause
 
+===========================================================
+
+What is containers.
 
 
+	HUMAN --> CLIENT --> SERVER --> CONTAINERD --> KERNAL
+	
+	Create ONE NETWORK
+	CREATE ONE PID
+	CREATE ONE MOUNT using DOCKER IMAGE
+	&&&
+	Create ONE USER
+	&&&& ATTACH
+		NETWORK
+		PID
+		MOUNT 
+			to the USER
 
 
-
-
+   71  docker ps -a
+   72  docker stop 9cac69f67899 1cd619d244a9
+   73  docker rm 9cac69f67899 1cd619d244a9
+   74  clear
+   75  docker [s
+   76  docker ps
+   77  clear
+   78  ps
+   79  ps -eaf | grep 8876
+   80  ps -eaf | grep 8874
+   81  ps -eaf | grep 8830
+   82  ps -eaf | grep 8829
+   83  ps -eaf | grep 8825
+   84  ps -eaf | grep 8824
+   85  clear
+   86  ps -eaf
+   87  clear
+   88  docker ps
+   89  ps -eaf | grep docker
+   90  ps -eaf | grep containerd
+   91  clear
+   92  id
+   93  docker ps
+   94  docker exec -it 5ddf0823c4c2 /bin/bash
+   95  clear
+   96  docker exec -it 5ddf0823c4c2 /bin/bash
+   97  clear
+   98  dcoker
+   99  docker ps
+  100  docker inspect 5ddf0823c4c2
+  101  clear
+  102  docker ps
+  103  docker exec 5ddf0823c4c2 df -kh
+  104  docker exec 7f3433ff50bc df -kh
+  105  docker exec 7f3433ff50bc touch /tmp/rajesh.txt
+  106  docker exec 7f3433ff50bc ls /tmp/
+  107  docker exec 5ddf0823c4c2 ls /tmp/
+  108  docker exec 5ddf0823c4c2 ls /
+  109  hisotyr
+  110  history
 
 
 
