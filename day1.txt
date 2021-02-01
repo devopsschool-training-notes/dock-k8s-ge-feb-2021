@@ -340,6 +340,161 @@ What is containers.
   108  docker exec 5ddf0823c4c2 ls /
   109  hisotyr
   110  history
+============================================
+
+How to use Container?
+=============================
+
+RUN
+-------------------------------------
+Pull -> Create -> Start -> Become a Container(Attached to a Container PID1)
+
+RUN -d
+-------------------------------------
+Pull -> Create -> Start -> DO NOT Become a Container(DO NoT Attached to a Container PID1)
+
+ 111  clear
+  112  ls
+  113  docker ps
+  114  docker stop ecff8d43aab3 06cdfe686a78 5ddf0823c4c2 7f3433ff50bc
+  115  docker rm ecff8d43aab3 06cdfe686a78 5ddf0823c4c2 7f3433ff50bc
+  116  clear
+  117  docker ps
+  118  docker run jenkins/jenkins
+  119  clear
+  120  docker ps
+  121  docker run -d jenkins/jenkins
+  122  docker ps
+  123  docker run -d jenkins/jenkins
+  124  docker ps
+  125  docker run -d jenkins/jenkins
+  126  docker ps
+  127  clear
+  128  docker ps
+  129  docker exec -it 7223876d0257 /bin/bash
+  130  docker ps
+  131  docker run jenkins/jenkins
+  132  docker ps
+  133  history
+
+
+
+Physical Server		Virutal Server		Container is running
+is running		is running
+As long as 		As long as 		As long as
+PID 1 is running	PID 1 is running	PID 1 is running	
+		
+PID 1 is SYSTEMD	PID 1 is SYSTEMD	PID 1 can be anything'
+						java
+						perl
+						python
+						/bin/bash
+						/bin/tini
+						a
+						b
+						c
+						
+As long as "anything" container is running.	
+
+==================================================================
+How to go inside a container?
+
+exec
+	it would execute any executable inside a container
+	but using -it and /bin/bash - you can inside
+
+
+attach
+	using attach you can attach to a process of PID1
+
+
+IF you attach to PID1 which is SHELL - you can deattach using
+Control + P + Q
+
+
+How to access a container from outside?
+
+docker run -d -p 8080:8080 jenkins/jenkins
+docker run -d -p 8090:8080 jenkins/jenkins
+
+8090:8080
+nodeport:containerport
+
+
+
+
+ 1  vi /etc/ssh/sshd_config
+    2  passwd centos
+    3  systemctl restart sshd
+    4  clear
+    5  docker ps
+    6  docker exec 2541cbe2ce09 ps -eaf
+    7  clear
+    8  ps -eaf
+    9  clear
+   10  docker run ubuntu
+   11  docker ps
+   12  docker ps -a
+   13  /bin/bash
+   14  clear
+   15  docker ps -a
+   16  ls
+   17  clear
+   18  docker run ubuntu ls
+   19  docker ps -a
+   20  clear
+   21  docker run centos
+   22  docker ps
+   23  docker ps -a
+   24  clear
+   25  clear
+   26  docker ps
+   27  docker exec 2752b838c800 ls
+   28  docker exec 2752b838c800 df -kh
+   29  clear
+   30  docker exec 2752b838c800 free
+   31  docker exec 2752b838c800 fgh
+   32  fgh
+   33  docker exec -it 2752b838c800 /bin/bash
+   34  docker ps
+   35  docker attach 2752b838c800
+   36  docker ps
+   37  clear
+   38  docker ps
+   39  docker run -it ubuntu
+   40  docker ps
+   41  docker attach 7abe6e55aeb4
+   42  docker ps -a
+   43  clear
+   44  docker run -itd ubuntu
+   45  docker ps
+   46  docker ps
+   47  docker run -itd ubuntu
+   48  docker ps
+   49  docker run -d jenkins
+   50  docker run -d jenkins/jenkins
+   51  docker ps
+   52  clear
+   53  docker ps
+   54  docker inspect a34b1f06a8c2
+   55  clear
+   56  ping 172.17.0.5
+   57  curl http://172.17.0.5:8080
+   58  clear
+   59  clear
+   60  docker run -d -p 8080:8080 jenkins/jenkins
+   61  docker ps
+   62  docker run -d -p 8090:8080 jenkins/jenkins
+   63  docker run -d -p 8080:8080 jenkins/jenkins
+   64  history
+
+
+
+
+
+
+
+
 
 
 
