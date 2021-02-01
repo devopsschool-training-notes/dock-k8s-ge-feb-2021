@@ -1,0 +1,293 @@
+1234567890
+=============================
+Rajesh Kumar
+============
+Docker - 2 Days
+Kubernetes - 3 Days
+--------------
+Start - 9 AM IST
+End - 5 PM IST
+=========================
+LUNCH - 1 PM - 2 PM
+2 TEA BREAK - 
+		11 AM - 15 - 20 mins
+		3.30 PM IST
+-----------------------------
+Demo + Lab === AWS
+============================
+==============================================
+What is Docker?
+----------------
+Container mgmt tool
+Release
+	Enterprise  	- PAID
+	Community	- FREE
+Written in golang
+by Soloman Hykes
+Release
+	20.X
+
+Other Container mgmt tool
+-==================================
+https://www.devopsschool.com/blog/list-of-top-container-runtime-interface-projects/
+
+Tool
+- Saving a Cost
+- Save a time
+- Impro Quality | Eff*
+--------------------
+	FOR RUNNING YOUR APP in DataCenter | Dev | QA | PROD
+
+What is Container?
+========================================================================
+- A lightweight fully independent APP run time env
+
+- a allocation of 
+	ONE NET
+	ONE PID
+	ONE RFS(MNT) to (Comes from Image)
+		EACH USER
+=============================
+	FOr running app inde* and Cheaper and faster
+
+
+
+How APPS RUN?
+What are the components needed to RUN app?
+========================================================================
+========================================================================
+HARDWARE
+	OS
+	  Kernal			NEED		ALLOWED by OS		CAN
+		Namespace
+			USER		1		MUL			MUL
+			RFS AKA MNT	1		1			MUL	
+			PID		1		1			MUL
+			NET		1		1			MUL
+		Cgroups
+	
+		Capabilties
+			Decide ROOT or NOT ROOT
+
+		 USER	
+
+			JAVA
+				TOMCAT
+					APP
+
+
+What is kernel?
+The kernel is a computer program at the core of a computer's operating system that has complete
+                ---------------- 
+control over everything in the system.
+
+Cgroup
+cgroups (abbreviated from control groups) is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes.
+
+Filesystem
+-------------------
+- collections of file & dir for SPECFIC purpose
+
+TYPE
+- BOOTFS == KERNAL
+- ROOTFS
+- APPFS
+- USERFS
+
+WHY OS not allowed for Multiple PID - NET - MNT?
+========================================================
+PC
+	Personal Computing
+
+
+How to run APPS in Datacenter? (Internet based)
+		- Cheaper
+		- faster
+		- Better
+
+Evolution of Computing
+==================================================
+Before 2000s
+--------------------------------------------------
+PHYSiCAL		Virtual	
+	
+
+=========================================================================================
+Docker Architecture AKA How Docker Works!!!
+---------------------------------------------
+Human => Docker client -----REST API----> Docker Server -----> ContainerD ---> Kernal
+        =================================================
+			Docker Engine       
+
+
+Docker Components
+=========================================
+1. Docker Engine
+
+2. Docker Image = ROOTFS + USERFS + APPFS
+			ubuntu = rfs + ufs
+			centos = rfs + ufs
+			jenkins = rfs + ufs + java + jenkins
+
+
+Vms Image = BOOTFS + 	ROOTFS + USERFS + APPFS
+	    (LINUX KER)	ubuntu   root
+  	    (WIN KER)   win2019  administrator
+
+	- ONE COPY of Docker Image GET MOUNTED TO EACH USER aka container
+	- From One image you can create multiple container.
+
+3. Registry
+	contains
+		repository
+			contains 
+				version of filesystem
+				=== ROOTFS 
+				===+ USERFS 
+				===+ APPFS
+			=============================
+				image
+	Public
+		hub.docker.com
+		google registry
+
+	Pvt
+		artifactory
+		nexus
+
+4. Docker Container 
+
+
+	HUMAN --> CLIENT --> SERVER --> CONTAINERD --> KERNAL
+	
+	Create ONE NETWORK
+	CREATE ONE PID
+	CREATE ONE MOUNT using DOCKER IMAGE
+	&&&
+	Create ONE USER
+	&&&& ATTACH
+		NETWORK
+		PID
+		MOUNT 
+			to the USER
+======================================================================================
+Docker Workflow?
+=====================================================
+Human -> Client -> Server
+			CHECK if Image Exist in Local
+			YES -  ContainerD --> Kernal
+			NO - DOWNLOAD form hub ->  ContainerD --> Kernal
+
+Container Lifecyle
+-----------------------------
+Create -> Start -> STOP -> Start -> Restart -> Pause --> Unpause -> KILL -> remove
+
+VMs LifeCycle
+------------------------------
+Create -> Start -> STOP -> Start -> Restart -> Pause --> Unpause -> KILL -> remove
+
+
+How to Install Docker?
+https://www.devopsschool.com/tutorial/docker/install-config/docker-install-commuityedition-centos-rhel.html
+
+   1  vi /etc/ssh/sshd_config
+    2  passwd centos
+    3  systemctl restart sshd
+    4  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    5  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    6  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    7  clear
+    8  sudo yum install –y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    9  sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
+   10  sudo yum install -y docker-ce
+   11  docker -v
+   12  sudo systemctl enable docker
+   13  sudo systemctl start docker
+   14  docker info
+   15  clear
+   16  which docker
+   17  ps -eaf | grep docker
+   18  which containerd
+   19  history
+
+=====
+DOCKER NEED ROOT to send a command
+or
+USER need to be part of group called "docker"
+======================================
+Lab & Demo 
+---------------
+3.7.45.18
+UserName - centos
+Password - centos123
+
+ 16  which docker
+   17  ps -eaf | grep docker
+   18  which containerd
+   19  history
+   20  clea r
+   21  clear
+   22  docker version
+   23  docker help
+   24  docker help attach
+   25  clear
+   26  docker ps -a
+   27  docker ps
+   28  docker images
+   29  docker pull jenkins/jenkins
+   30  docker images
+   31  clear
+   32  docker images
+   33  docker create jenkins/jenkins
+   34  docker ps
+   35  docker ps -a
+   36  docker create --name=jenkins1 jenkins/jenkins
+   37  docker ps -a
+   38  docker create --name=jenkins1 jenkins/jenkins
+   39  docker create --name=jenkins2 jenkins/jenkins
+   40  docker ps -a
+   41  clear
+   42  docker ps -a
+   43  docker start 8664b1b14131
+   44  docker ps -a
+   45  docker start 9cac69f67899
+   46  docker ps -a
+   47  clear
+   48  docker ps
+   49* docker stop 8664b1b1413
+   50  docker ps -a
+   51  docker start 8664b1b14131
+   52  docker ps -a
+   53  clear
+   54  docker ps -a
+   55  docker restart 8664b1b14131 9cac69f67899
+   56  docker ps -a
+   57  clear
+   58  docker pause 8664b1b14131
+   59  docker ps -a
+   60  docker unpause 8664b1b14131
+   61  docker ps -a
+   62  docker kill 8664b1b14131
+   63  docker ps -a
+   64  clear
+   65  docker ps -a
+   66  docker rm 8664b1b14131
+   67  docker rm 9cac69f67899
+   68  history
+
+
+Assignment
+----------------------
+Stop Vs Kill
+Pause Vs Unpause
+
+
+
+
+
+
+
+
+
+
+
