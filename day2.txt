@@ -119,6 +119,211 @@ top	Display the running processes of a container
   406  clear
   407  docker help events
   408  docker events
+============================================================================
+Docker Image = ROOTFS + USERFS + APPFS
+		ubuntu = rfs + ufs
+		centos = rfs + ufs
+		jenkins = rfs + ufs + java + jenkins
+
+
+Vms Image = BOOTFS + 	ROOTFS + USERFS + APPFS
+	    (LINUX KER)	ubuntu   root
+  	    (WIN KER)   win2019  administrator
+
+	- ONE COPY of Docker Image GET MOUNTED TO EACH USER aka container
+	- From One image you can create multiple container.
+
+======================================================================
+Images has multiple Layers
+Each layer is filesystem
+Layer0 = always - rootfs
+When we create a container - All the layers get merged into ONE
+		MOUNTED TO Container Process.
+
+
+ 419  docker stop $(docker ps -a -q)
+  420  docker rm $(docker ps -a -q)
+  421  clear
+  422  docker ps -a
+  423  docker images
+  424  docker rmi tomcat alpine jenkins/jenkins postgres ubuntu nginx httpd bash centos
+  425  clear
+  426  docker images
+  427  docker ps -a
+  428  docker info
+  429  clear
+  430  cd /var/lib/docker
+  431  ls
+  432  docker info
+  433  clear
+  434  ls
+  435  pwd
+  436  ls -1
+  437  history
+
+
+[root@ip-172-31-2-101 docker]# ls -1
+buildkit
+containers		# Meta info for the container
+image			# Meta info for the image
+network			# ???
+overlay2		# Image data layer are present
+plugins
+runtimes
+swarm
+tmp
+trust
+volumes			# ???
+[root@ip-172-31-2-101 docker]#
+
+
+439  cd overlay2
+  440  pwd
+  441  clear
+  442  ls
+  443  du -sh .
+  444  docker pull ubuntu
+  445  ls
+  446  clear
+  447  ls
+  448  docker images
+  449  docker inspect ubuntu
+  450  ls
+  451  clear
+  452  docker inspect ubuntu
+  453  ls
+  454  du -sh --max-depth=1
+  455  du -h --max-depth=1
+  456  docker history ubuntu
+  457  docker images
+  458  ls
+  459  clear
+  460  du -h --max-depth=1
+  461  cd ./beecd546850be4721c98abccfd47e55ebf903fce4aaf4ce5306997c7e87a2cda
+  462  ls
+  463  clear
+  464  ls
+  465  cd diff/
+  466  ls
+  467  cd ..
+  468  ls
+  469  cd ..
+  470  ls
+  471  cd aa848cfb097894a9bd57c711ec0280597bf622b28e7724288b0aec5132a52f95
+  472  lks
+  473  ls
+  474  clear
+  475  ls
+  476  cd diff/
+  477  ls
+  478  clear
+  479  cd ..
+  480  ls
+  481  cd ..
+  482  ls
+  483  docker run -itd ubuntu
+  484  docker ps
+  485  ls
+  486  du -sh 2c13a5c9fc1ed2149bbde785006817d62bcea5399cead7d2cfcd8c0b51a04972-init
+  487  du -sh 2c13a5c9fc1ed2149bbde785006817d62bcea5399cead7d2cfcd8c0b51a04972
+  488  cd 2c13a5c9fc1ed2149bbde785006817d62bcea5399cead7d2cfcd8c0b51a04972
+  489  clear
+  490  ls
+  491  cd diff/
+  492  ls
+  493  cd ..
+  494  ls
+  495  cd merged/
+  496  ls
+  497  cd ..
+  498  clear
+  499  ls
+  500  df -kh
+  501  docker run -itd ubuntu
+  502  df -kh
+  503  clear
+  504  docker ps
+  505  docker stop 14fedb637d28
+  506  df -kh
+  507  docker start 14fedb637d28
+  508  df -kh
+
+=============================================================
+=============================================================
+How to create an Images?
+==============================
+Manual - ONE LAYER AT TIME
+-- Using Existing Container
+
+Automated - MULTIPLE LAYER AT TIME
+-- Using Dockerfile
+
+
+Image Requirement
+=========================
+base - ubuntu
+	git
+	java
+	apache2
+=========================
+What is Dockerfile?
+	- file 
+	container instructions for each layer
+
+Sample - 
+dockerfile
+------------------
+FROM ubuntu
+MAINTAINER Rajesh Kumar <rajesh@devopsschool.com>
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install apache2 -y && apt-get install -y tzdata
+RUN apt-get install git -y
+RUN apt-get install openjdk-8-jre -y
+
+Rule of Dockerfile
+=============
+- Each line in dockerfile - create one layer.
+- Each layer get created from the container of Previous line layer
+
+
+FROM ubuntu
+MAINTAINER Rajesh Kumarsdsd dsa <rajesh@devopsschool.com>
+RUN touch /opt/devopsschool1.txt
+RUN touch /opt/devopsschool2.txt
+RUN touch /opt/devopsschool3.txt
+
+  567  clear
+  568  clear
+  569  docker ps
+  570  docker commit -m"up-up-git-java-ap" -a
+  571  docker commit -m"up-up-git-java-ap" -a
+  572  docker commit -m"up-up-git-java-ap" -a"Rajesh Kumar" b294b7128d39 up-up-git-java-ap
+  573  clear
+  574  docker images
+
+
+
+ 593  ls
+  594  vi dockerfile
+  595  docker build -t raju .
+  596  vi dockerfile
+  597  docker build -t raju .
+  598  vi dockerfile
+  599  docker build -t raju .
+  600  vi dockerfile
+  601  docker build -t raju .
+  602  docker images
+  603  docker history raju
+  604  clear
+  605  ls
+  606  docker doc1
+  607  vi doc1
+  608  docker build -t doc1 -f doc1 .
+  609  clear
+  610  cd -
+  611  find . -name devopsschool*
+
+
 
 
 
