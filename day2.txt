@@ -78,8 +78,47 @@ Assignment
 update	Update configuration of one or more containers
 wait	Block until one or more containers stop, then print their exit codes
 
+logs	Fetch the logs of a container - PID1  Log
+-------------------------------------------
+	
+  377  docker run -itd --name ub1 ubuntu
+  378  docker ps
+  379  history
+  380  clear
+  381  docker ps
+  382  docker logs 83b0bace2733
+  383  docker logs 83b0bace2733
+  384  docker logs 83b0bace2733
+  385  docker logs 83b0bace2733
+  386  clear
+  387  docker ps
+  388  docker lo
+
+stats	Display a live stream of container(s) resource usage statistics
+	CPU
+	RAM
+	DISK
+	NET
+
+  392  docker stats
+  393  docker stats 00ec009720b6
 
 
+top	Display the running processes of a container
+ 396  docker ps
+  397  ps -eaf | grep containerd
+  398  docker top 00ec009720b6
+  399  clear
+
+
+
+ 402  docker events
+  403  docker help events
+  404  docker help --format events
+  405  docker help events
+  406  clear
+  407  docker help events
+  408  docker events
 
 
 
