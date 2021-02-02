@@ -526,6 +526,46 @@ Step5 - docker push
 
 https://www.devopsschool.com/blog/?s=artifactory
 
+==================================================
+==================================================
+==================================================
+Deep Dive into Dockerfile
+------------------------------------
+jenkins/jenkins
+	ROOTFS + JAVA + JENKINS
+	openjdk:8-jdk
+		buildpack-deps:buster-scm
+			buildpack-deps:buster-curl
+				debian:buster
+					scratch
+
+ENTRYPOINT VS CMD
+=============================
+
+
+How to set PID1?
+	for the container in the IMAGE?
+
+	ENTRYPOINT OR CMD
+=====================================
+Initially 
+CMD ----
+	CMD can be replaced.
+
+ENTRYPOINT 
+	ENTRYPOINT can not be replaced.
+
+2 CMD???
+2 ENTRYPOINT ???
+1 CMD and 1 ENTRYPOINT ???
+
+https://www.devopsschool.com/tutorial/docker/dockerfile/dockerfile-example-sample-lab.html
+
+
+
+
+
+
 
 
 
