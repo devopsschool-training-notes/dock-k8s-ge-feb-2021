@@ -1,0 +1,86 @@
+15.207.21.1
+user - centos
+Pass - centos123
+=========================
+https://www.devopsschool.com/tutorial/docker/commands/index.html
+
+cp	Copy files/folders between a container and the local filesystem
+---------------
+ 335  docker ps
+  336  docker exec 65a8c1838f40 ls /opt
+  337  docker cp get-docker.sh 65a8c1838f40:/opt
+  338  docker exec 65a8c1838f40 ls /opt
+  339  ls
+  340  rm -f get-docker.sh
+  341  clear
+  342  docker exec 65a8c1838f40 ls /opt
+  343  ls
+  344  docker cp 65a8c1838f40:/opt/get-docker.sh .
+  345  ls
+  346  history
+
+diff	Inspect changes to files or directories on a container's filesystem
+---------------
+	ADDED
+	CHANGED
+	DELETED
+
+  349  docker ps
+  350  docker attach 65a8c1838f40
+  351  clear
+  352  ls
+  353  docker ps
+  354  docker diff 65a8c1838f40
+
+inspect	Return low-level information on Docker objects
+---------------
+	Docker objects
+	- Container
+	- Image
+	- Volume
+	- Networking
+	- plugins
+
+  355  history
+  356  clear
+  357  docker ps
+  358  docker inspect 65a8c1838f40
+  359  clear
+  360  docker images
+  361  docker inspect jenkins/jenkins
+  362  history
+
+	
+---------------------------
+port	List port mappings or a specific mapping for the container
+
+  365  docker port 65a8c1838f40
+  366  docker run -d jenkins/jenkins
+  367  docker ps
+  368  docker port 378d65bab8e4
+  369  docker run -d -p 8080:8080 jenkins/jenkins
+  370  docker port 378d65bab8e4
+  371  docker port c375e3b62f9a5999c7f040a5271254d5be8e2b516c1d82d73eff97f612f69e90
+  372  history
+
+Rename
+---------------
+  373  clear
+  374  docker ps
+  375  docker rename c375e3b62f9a jenkins1
+  376  docker ps
+  377  docker run -itd --name ub1 ubuntu
+  378  docker ps
+  379  history
+
+Assignment
+-------------------
+update	Update configuration of one or more containers
+wait	Block until one or more containers stop, then print their exit codes
+
+
+
+
+
+
+
