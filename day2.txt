@@ -466,6 +466,79 @@ Docker Volume TYPES
 
 https://www.devopsschool.com/blog/understand-docker-volume-from-beginner-to-deep-dive-level/
 
+=======================================================
+How to share an Images?
+- Using TAR
+
+ 628  docker images
+  629  ls
+  630  pwd
+  631  docker save -o devtest.tar devtest
+  632  ls
+  633  docker rmi devtest
+  634  docker images
+  635  clear
+  636  ls
+  637  docker load -i devtest.tar
+  638  docker images
+
+
+
+- Using Public Repo
+	hub.docker.com
+
+Step1  - Register and validate your account hub.docker.com
+Step2 -  Create a repo at hub. 1 PVT FREE + Unlimited Public free
+
+Step3 -  Make sure your local image repo name -- MUST MATCH --- repo name of hub.
+Step4 - docker login
+Step5 - docker push
+
+628  docker images
+  629  ls
+  630  pwd
+  631  docker save -o devtest.tar devtest
+  632  ls
+  633  docker rmi devtest
+  634  docker images
+  635  clear
+  636  ls
+  637  docker load -i devtest.tar
+  638  docker images
+  639  history
+  640  clear
+  641  ls
+  642  docker images
+  643  docker tag centos-with-mul-file devopsschools/febdockk8s
+  644  docker images
+  645  docker login
+  646  docker login
+  647  clear
+  648  ls
+  649  docker images
+  650  docker push devopsschools/febdockk8s
+  651  history
+
+
+- Using pvt Repo
+	Artifactory
+	Nexus
+
+https://www.devopsschool.com/blog/?s=artifactory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
