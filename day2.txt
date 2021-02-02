@@ -322,6 +322,151 @@ RUN touch /opt/devopsschool3.txt
   609  clear
   610  cd -
   611  find . -name devopsschool*
+===================================================
+Docker Volume
+=================================================
+PRB - Container is GONE - Data is GONE.
+---
+How to have data persistency beyond a life cycle of a container?
+Solution - Docker Volume
+
+Docker Volume TYPES
+-----------------
+- volume		/var/lib/docker/volumes			
+- mountfs		ANYWHERE IN THE HOST MACHINE
+- tempfs		MEMORY
+
+337  docker run -itd ubuntu
+  338  docker ps
+  339  docker exec 0d71442ac261 touch /opt/raju.txt
+  340  docker exec 0d71442ac261 ls /opt
+  341  cd /var/lib/docker/
+  342  find . -name raju.txt
+  343  docker stop 0d71442ac261d8def9325b2d655ec5fbf75519dc654f7ec2bb5962c15527200f
+  344  find . -name raju.txt
+  345  docker rm 0d71442ac261d8def9325b2d655ec5fbf75519dc654f7ec2bb5962c15527200f
+  346  find . -name raju.txt
+  347  cloear
+  348  ls
+  349  clear
+  350  cd volumes/
+  351  pwd
+  352  clear
+  353  docker volume
+  354  docker volume ls
+  355  cd 59f8b0c118f9a50c21dcdb18abbc34aa0fdbead84910fcac41c5f4e7c3167e28
+  356  ls
+  357  clear
+  358  ls
+  359  cd
+  360  ls
+  361  cd ..
+  362  ls
+  363  pwd
+  364  cd -
+  365  cd /var/lib/docker/volumes/
+  366  ls
+  367  clear
+  368  ls
+  369  cd 3872136347b1a9e850612488d322865a20c3ba6704121296cc5533a40225ad63
+  370  ls
+  371  clear
+  372  ls
+  373  cd _data/
+  374  ls
+  375  clear
+  376  ls
+  377  cd ..
+  378  ls
+  379  clear
+  380  docker volume
+  381  docker volume prune
+  382  clear
+  383  ls
+  384  cd ..
+  385  ls
+  386  du -sh .
+  387  docker volume create dev1
+  388  docker volume create dev2
+  389  ls
+  390  docker volume create
+  391  ls
+  392  cd dev
+  393  cd dev1
+  394  clear
+  395  ls
+  396  cd _data/
+  397  ls
+  398  cd ..
+  399  ls
+  400  clear
+  401  ls
+  402  cd ..
+  403  ls
+  404  cd ..
+  405  ls
+  406  cd volumes/
+  407  ls
+  408  docker run -itd -v dev1:/opt/devopsschool ubuntu
+  409  docker ps
+  410  docker exec 6711ba477b64 ls /opt
+  411* docker exec 6711ba477b64 touch  /opt
+  412  docker exec 6711ba477b64 ls /opt/devopsschool
+  413  ls
+  414  cd dev1/
+  415  clear
+  416  ls
+  417  cd _data/
+  418  ls
+  419  touch ramu2.txt
+  420  ls
+  421  docker exec 6711ba477b64 ls /opt/devopsschool
+  422  docker run -itd -v dev1:/opt/devopsschool ubuntu
+  423  docker run -itd -v dev1:/opt/devops1 -v dev2:/opt/devops2 ubuntu
+  424  docker ps
+  425  docker exec f9d97086ce46 ls /opt
+  426  clear
+  427  docker ps
+  428  docker stop f9d97086ce46 9dda97770e0c 6711ba477b64
+  429  docker rm f9d97086ce46 9dda97770e0c 6711ba477b64
+  430  ls
+  431  pwd
+  432  cd ..
+  433  ls
+  434  cd ..
+  435  ls
+  436  clear
+  437  ls
+  438  cd dev1
+  439  ls
+  440  cd _data/
+  441  ls
+  442  docker volume
+  443  docker inspect dev1
+  444  docker volume dev2
+  445  docker volume rm dev2
+  446  ls
+  447  cd ..
+  448  ls
+  449  cd ..
+  450  ls
+  451  docker volume rm 5d82423ea3ed10f9d5b5305d7d8fc42c8eaf334fd5a955abd7aefc7b6e5d01e6
+  452  ls
+  453  clear
+  454  cd /opt/
+  455  ls
+  456  mkdir backip
+  457  cd backip/
+  458  pwd
+  459  docker run -itd -v /opt/backip:/opt/ramu ubuntu
+  460  docker ps
+  461  docker exec 6f7560319a5e df -kh
+  462  history
+
+
+https://www.devopsschool.com/blog/understand-docker-volume-from-beginner-to-deep-dive-level/
+
+
 
 
 
