@@ -1,0 +1,195 @@
+3.7.68.25
+
+Docker Networking
+Docker Compose
+==============================
+Kubernetes
+====================================================
+Docker Networking
+====================================================
+VMs - 20 
+============
+Network Driver - 
+	-- Bridge
+	-- Host Only
+	-- No Network
+============================
+These are the defaul network driver in the docker.
+	-- Bridge
+	-- Host Only
+	-- No Network
+
+
+4e337620a6e3	DEV	172.18.0.3
+b96a2f6a3b86	BRIDGE	172.17.0.2	INSIDE
+==========================================================
+==========================================================
+==========================================================
+Docker Compose
+- Life Saving tool for Dev + QA who is working with containers.
+- Tool call it docker-compose
+			Read 
+				YAML
+				docker-compose.yaml
+-------------------------------------------
+Contains:
+	SERVICE(S)
+		SERVICE1: web
+			build - dockerfile
+			image - imagename
+			env - 
+			port
+			vol
+			net
+		SERVICE2: app
+			build - dockerfile
+			image - imagename
+			env - 
+			port
+			vol
+			net
+		SERVICE3: db
+			build - dockerfile
+			image - imagename
+			env - 
+			port
+			vol
+			net
+
+
+docker-compose 
+	$ docker-compose up
+	$ docker-compose down
+	
+
+
+version: '2'
+
+services:
+  wordpress:
+    image: wordpress:4.5
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    restart: always
+
+  db:
+    image: mariadb:10.1
+    volumes:
+      - "./volumes/db:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+
+
+
+ 1012  docker help run
+ 1013  clear
+ 1014  docker-compose
+ 1015  sudo curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ 1016  sudo chmod +x /usr/local/bin/docker-compose
+ 1017  sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+ 1018  docker-compose
+ 1019  clear
+ 1020  docker-compose -v
+ 1021  docker-compose
+ 1022  clear
+ 1023  cd
+ 1024  clear
+ 1025  ls
+ 1026  mkdir rajesh
+ 1027  cd rajesh/
+ 1028  ls
+ 1029  vi docker-compose.yaml
+ 1030  clear
+ 1031  ls
+ 1032  docker-compose up -d
+ 1033  clear
+ 1034  docker-compose ps
+ 1035  ls
+ 1036  ls -la
+ 1037  docker-compose
+ 1038  docker-compose config
+ 1039  docker-compose create
+ 1040  docker-compose
+ 1041  clear
+ 1042  docker-compose down
+ 1043  ls
+ 1044  docker-compose ps
+ 1045  docker ps
+ 1046  docker-compose up -d
+ 1047  docker ps
+ 1048  clear
+ 1049  docker-compose stop
+ 1050  docker-composeps
+ 1051  docker-compose ps
+ 1052  docker-compose start
+ 1053  docker-compose ps
+ 1054  docker-compose
+ 1055  clear
+ 1056  docker-compose logs
+ 1057  clear
+ 1058  docker-compose
+ 1059  docker-compose ps
+ 1060  ls
+ 1061  docker-compose scale -h
+ 1062  clear
+ 1063  docker-compose scale wordpress=3
+ 1064  docker ps -a
+ 1065  clear
+ 1066  docker-compose scale db=3
+ 1067  docker-compose ps
+ 1068  ls
+ 1069  cd volumes/
+ 1070  ls
+ 1071  du -sh .
+ 1072  cd db/
+ 1073  ls
+ 1074  clear
+ 1075  cd ..
+ 1076  ls
+ 1077  cd ..
+ 1078  ls
+ 1079  ls -la
+ 1080  docker-compose
+ 1081  clear
+
+
+https://devopsschool.com/tutorial/docker/docker-compose/docker-compose-example.html
+
+https://devopsschool.com/tutorial/docker/docker-compose/docker-compose-example1.html
+
+https://devopsschool.com/tutorial/docker/docker-compose/docker-compose-example2.html
+
+https://devopsschool.com/tutorial/docker/docker-compose/docker-compose-example3-networking.html
+
+https://devopsschool.com/tutorial/docker/docker-compose/docker-compose-example4-volume.html
+
+https://devopsschool.com/tutorial/docker/docker-compose/docker-compose-example-basics.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
