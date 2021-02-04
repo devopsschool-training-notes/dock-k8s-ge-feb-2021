@@ -406,12 +406,129 @@ DELETE
    86  kubectl get ns
    87  history
 
+==================================================================================
+==================================================================================
+pod.yaml
+-------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels: 
+    app: webserver
+spec:
+  containers:
+  - name: hello-ctr
+    image: nginx
+    ports:
+    - containerPort: 80
+=======================
+rajesh@devopsschool.com
+=======================
 
+ 140  vi pod.yaml
+  141  kubectl create -f pod.yaml -n=rajesh
+  142  kubectl get pods -n=rajesh
+  143  kubectl get pods
+  144  kubectl create -f pod.yaml -n=rajesh
+  145  kubectl create -f pod.yaml
+  146  clear
+  147  kubectl get pods
+  148  kubectl get pods -n=rajesh
+  149  clear
+  150  kubectl get pods -n=rajesh
+  151  kubectl edit pod hello-pod -n=rajesh
+  152  kubectl get pods -n=rajesh
+  153  kubectl get pods -n=rajesh --show-lables
+  154  kubectl get pods -n=rajesh --show-labels
+  155  vi pod.yaml
+  156  kubectl apply -f pod.yaml -n=rajesh
+  157  kubectl get pods -n=rajesh --show-labels
+  158  clear
+  159  kubectl get pods
+  160  kubectl delete pod hello-pod
+  161  kubctl delete -f pod.yaml -n=rajesh
+  162  kubectl delete -f pod.yaml -n=rajesh
+  163  kubctl get pods
+  164  kubectl get pods
+  165  kubectl get pods -n=rajesh
 
+=========================================
+Deep Dive into the POD
+How to use the pod?
+How to debug a pod?
+=============================================
 
+Troubleshooting and Debugging Commands:
+  describe      Show details of a specific resource or group of resources
+  logs          Print the logs for a container in a pod
+  attach        Attach to a running container
+  exec          Execute a command in a container
+  port-forward  Forward one or more local ports to a pod
+  cp            Copy files and directories to and from containers.
+  auth          Inspect authorization
+  debug         Create debugging sessions for troubleshooting workloads and nodes
 
+kubectl port-forward pod/hello-pod 8888:80 -n=rajesh
 
+kubectl port-forward --address 0.0.0.0 pod/hello-pod 8888:80 -n=rajesh
 
+ 166  history
+  167  clear
+  168  kubectl
+  169  clear
+  170  kubectl apply -f pod.yaml -n=rajesh
+  171  kubectl get pods -n=rajesh
+  172  kubectl get pods -n=rajesh -o wide
+  173  kubectl describe pod hello-pod -n=rajesh
+  174  clear
+  175  kubectl describe pod hello-pod -n=rajesh
+  176  clear
+  177  kubectl describe pod hello-pod -n=rajesh
+  178  clear
+  179  ls
+  180  kubectl describe ns rajesh
+  181  clear
+  182  kubectl get pods -n=rajesh
+  183  kubectl logs hello-pod
+  184  kubectl logs hello-pod -n=rajesh
+  185  kubectl get pods -n=rajesh -o wide
+  186  watch kubectl logs hello-pod -n=rajesh
+  187  clear
+  188  kubectl logs -h
+  189  clear
+  190  kubectl get pods -n=rajesh
+  191  kubectl attach hello-pod
+  192  kubectl attach hello-pod -n=rajesh
+  193  clear
+  194  kubectl get pods -n=rajesh
+  195  kubectl exec hello-pod -n=rajesh ls
+  196  clear
+  197  kubectl exec -it hello-pod -n=rajesh /bin/bash
+  198  clear
+  199  kubectl get pods -n=rajesh -o wide
+  200  kubectl port-forward -h
+  201  clear
+  202  kubectl get pods -n=rajesh -o wide
+  203  clear
+  204  kubectl port-forward pod/hello-pod 8888:80 -n=rajesh
+  205  kubectl port-forward -h
+  206  clear
+  207  kubectl port-forward --address 0.0.0.0 pod/hello-pod 8888:80 -n=rajesh
+  208  clear
+  209  ls
+  210  kubectl cp pod.yaml hello-pod:/tmp -n=rajesh
+  211  kubectl exec hello-pod ls /tmp
+  212  kubectl exec hello-pod ls /tmp -n=rajesh
+  213  kubectl auth
+  214  kubectl auth can-i create pod
+  215  kubectl auth can-i delete pod
+  216  clear
+  217  kubectl auth can-i delete ns
+  218  kubectl auth can-i create ns
+  219  kubectl auth can-i create deploy
+  220  kubectl debug -h
+  221  history
 
 
 
