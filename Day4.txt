@@ -1,0 +1,213 @@
+Kubernetes Artchitecture: Summary
+====================================
+Master
+----------------
+- API Server 		-> POD -> Container -> Image -> Google Registry
+- ETCD			-> POD -> Container -> Image -> Google Registry
+- Controller Mgr	-> POD -> Container -> Image -> Google Registry
+- Schedular		-> POD -> Container -> Image -> Google Registry
+
+- Kubelet	- TOOL@NODE
+- Docker	- TOOL@NODE
+- Kubectl	- TOOL@NODE
+- kubeadm	- TOOL@NODE	$ kubeadm init
+- Kube Proxy	-> POD -> Container -> Image -> Google Registry
+		NETWORK DRIVER - NETWORK POLICY
+		- overway - weavenet POD -> Container -> Image -> Google Registry
+	
+Worker
+----------------
+- Kubelet	- TOOL@NODE
+- Docker	- TOOL@NODE
+- Kubectl	- TOOL@NODE
+- kubeadm	- TOOL@NODE	$ kubeadm join
+- Kube Proxy	-> POD -> Container -> Image -> Google Registry
+		NETWORK DRIVER - NETWORK POLICY
+		- overlay - weavenet POD -> Container -> Image -> Google Registry
+
+How to setup K8s Clustor?
+-----------------------------------
+DEV & Learning
+	- minikube.exe start
+		- PUll ONE VM Image
+		- RUN THAT IMAGE WITH VirtualBox
+		- IN that image - it would setup ONE NODE k8s clustor
+		
+	
+PROD - 40+
+Manual - Administrate k8s clustor
+- Kubeadm Manual way	-- PART OF SESSION
+- KOPS - Manual way with a integration with Cloud Services
+Outsource - Administrate k8s clustor
+- AWS --> EKS
+- AZURE --> AKS
+- GoogleCloud --> GKE
+
+Workstation
+----------------
+- Kubectl
+
+
+
+How to setup K8s Clustor using Kubeadm in Production?
+-----------------------------------
+Master + Workstation - 65.0.21.204
+User - centos
+Pass - centos123
+
+Worker - 13.233.193.247
+
+https://www.devopsschool.com/blog/setting-up-kubernetes-clusters-using-kubeadm-manual-way-in-rhel-7-centos7/
+
+===================== To Setup WorkStation==========================
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+===================== To Pod Netowkring Driver ==========================
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+===================== For k8s Worker ==========================
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.2.142:6443 --token whv5g6.60pw7r793q9ogt3n \
+    --discovery-token-ca-cert-hash sha256:e129ae01ef287ae3826a5e915f374d97b0d73989fa213d8b21dbd29b7858bb22
+=====================================================================================
+How kubectl (workstation) connect to API SERVER?
+---------------------------------------------------------
+kubectl 		
+	Read  ONE YAML file - Called "config"
+	$USER_HOME/.kube/config
+
+What is the content of "config"?
+----------------
+Clustor(S):
+	Clustor1: http://10.4.5.6:6443
+	Clustor2: http://10.4.5.4:6443
+	Clustor3: http://10.4.3.4:6443
+User(s)
+	User1: key + cert
+	User2: key + cert
+	User3: key + cert
+Context(S)
+	Context1: Clustor1 + User2
+	Context2: Clustor2 + User3
+	Context3: Clustor3 + User1
+curr-context:
+	Context2	
+=======================================
+
+[centos@ip-172-31-2-142 ~]$ kubectl
+kubectl controls the Kubernetes cluster manager.
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/overview/
+
+Basic Commands (Beginner):
+  create        Create a resource from a file or from stdin.
+  expose        Take a replication controller, service, deployment or pod and expose it as a new
+Kubernetes Service
+  run           Run a particular image on the cluster
+  set           Set specific features on objects
+
+Basic Commands (Intermediate):
+  explain       Documentation of resources
+  get           Display one or many resources
+  edit          Edit a resource on the server
+  delete        Delete resources by filenames, stdin, resources and names, or by resources and label
+selector
+
+Deploy Commands:
+  rollout       Manage the rollout of a resource
+  scale         Set a new size for a Deployment, ReplicaSet or Replication Controller
+  autoscale     Auto-scale a Deployment, ReplicaSet, or ReplicationController
+
+Cluster Management Commands:
+  certificate   Modify certificate resources.
+  cluster-info  Display cluster info
+  top           Display Resource (CPU/Memory/Storage) usage.
+  cordon        Mark node as unschedulable
+  uncordon      Mark node as schedulable
+  drain         Drain node in preparation for maintenance
+  taint         Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe      Show details of a specific resource or group of resources
+  logs          Print the logs for a container in a pod
+  attach        Attach to a running container
+  exec          Execute a command in a container
+  port-forward  Forward one or more local ports to a pod
+  proxy         Run a proxy to the Kubernetes API server
+  cp            Copy files and directories to and from containers.
+  auth          Inspect authorization
+  debug         Create debugging sessions for troubleshooting workloads and nodes
+
+Advanced Commands:
+  diff          Diff live version against would-be applied version
+  apply         Apply a configuration to a resource by filename or stdin
+  patch         Update field(s) of a resource
+  replace       Replace a resource by filename or stdin
+  wait          Experimental: Wait for a specific condition on one or many resources.
+  kustomize     Build a kustomization target from a directory or a remote url.
+
+Settings Commands:
+  label         Update the labels on a resource
+  annotate      Update the annotations on a resource
+  completion    Output shell completion code for the specified shell (bash or zsh)
+
+Other Commands:
+  api-resources Print the supported API resources on the server
+  api-versions  Print the supported API versions on the server, in the form of "group/version"
+  config        Modify kubeconfig files
+  plugin        Provides utilities for interacting with plugins.
+  version       Print the client and server version information
+
+Usage:
+  kubectl [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+---------------------------
+
+ 17  kubectl get nodes
+   18  clear
+   19  cd
+   20  pwd
+   21  ls -la
+   22  ls .kube/
+   23  more .kube/config
+   24  clear
+   25  kubectl config view
+   26  clear
+   27  kubectl
+   28  kubectl cluster-info
+   29  kubectl cluster-info dump
+   30  clear
+   31  kubectl cluster-info
+   32  kubectl
+   33  clear
+   34  kubectl version
+   35  kubectl
+   36  kubectl config -h
+   37  kubectl config get-clusters
+   38  kubectl config get-contexts
+   39  kubectl configget-users
+   40  kubectl config get-users
+   41  clear
+   42  kubectl
+   43  clear
+   44  kubectl get nodes
+   45  kubectl get pods --all-namespaces
+   46  clear
+   47  history
+
+---------------------------
+
