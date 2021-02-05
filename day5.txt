@@ -1,0 +1,94 @@
+Workstation - 15.207.249.194
+========================
+centos
+centos123
+--------------------------------------------
+- ReplicationController		BL
+- Deployment			BL
+- Services			BL
+- RBAC		5 		PL
+- Storage	- 6 		PL
+============================================
+What is ReplicationController?
+	- API Resources
+
+Replication = Replicate ONE pod to Many
+Controller = Make sure Desire must match with Actual
+
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hello-rc
+spec:
+  replicas: 2   
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-ctr
+        image: scmgalaxy/nginx-devopsschoolv1
+        ports:
+        - containerPort: 80
+
+ 840  cd rajesh
+  841  ls
+  842  vi rc.yaml
+  843  kubectl get ns
+  844  clear
+  845  kubectl get pods -n=rajesh
+  846  kubectl delete pod hello-pod -n=rajesh
+  847  clear
+  848  ls
+  849  kubectl apply -f rc.yaml -n=rajesh
+  850  kubectl get pods -n=rajesh
+  851  clear
+  852  ls
+  853  kubectl get rc -n=rajesh
+  854  kubectl describe rc hello-rc -n=rajesh
+  855  clear
+  856  ls
+  857  kubectl apply -f pod.yaml
+  858  kubectl apply -f pod.yaml -n=rajesh
+  859  kubectl get pods -n=rajesh
+  860  kubectl describe pod hello-pod -n=rajesh
+  861  clear
+  862  ls
+  863  kubectl get pods -n=rajesh
+  864  kubectl describe pod hello-rc-sn7m7 -n=rajesh
+  865  cleart
+  866  clear
+  867  kubectl get pods -n=rajesh
+  868  kubectl get rc -n=rajesh
+  869  kubectl edit rc hello-rc -n=rajesh
+  870  kubectl get pods -n=rajesh
+  871  vi rc.yaml
+  872  kubectl apply -f rc.yaml -n=rajesh
+  873  kubectl get pods -n=rajesh
+  874  clear
+  875  kubectl get pods -n=rajesh
+  876  kubectl delete pod hello-rc-sn7m7 hello-rc-xpq9q -n=rajesh
+  877  kubectl get pods -n=rajesh
+  878  kubectl get rc -h
+  879  clear
+  880  history
+  881  clear
+  882  s
+  883  kubectl
+  884  clear
+  885  kubectl get rc -h
+  886  clear
+  887  kubectl get rc -n=rajesh
+  888  kubectl -h
+  889  clear
+  890  kubectl scale -h
+  891  clear
+  892  kubectl get rc -n=rajesh
+  893  kubectl scale --replicas=3 rs/hello-rc -n=rajesh
+  894  kubectl scale --replicas=3 rc/hello-rc -n=rajesh
+  895  kubectl get rc -n=rajesh
+  896  kubectl get pods -n=rajesh
+  897  history
+
